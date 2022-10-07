@@ -1,0 +1,22 @@
+---
+name: Sender
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Save run number
+        env:
+          RUN_NUMBER: ${{ github.run_number }}
+        run: |
+          mkdir -p ./run
+          echo $RUN_NUMBER > ./run/run_number
+      - uses: actions/upload-artifact@v3
+        with:
+          name: run_number
+          path: run/
