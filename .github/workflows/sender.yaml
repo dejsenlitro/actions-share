@@ -7,7 +7,7 @@ on:
       - master
 
 jobs:
-  build:
+  Send:
     runs-on: ubuntu-latest
     steps:
       - name: Save run number

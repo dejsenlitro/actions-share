@@ -8,10 +8,8 @@ on:
       - completed
 
 jobs:
-  Deploy:
+  Receive:
     runs-on: ubuntu-latest
-    outputs:
-      output1: ${{ steps.step1.outputs.test }}
 
     steps:
       - name: 'Download artifact'
@@ -39,7 +37,11 @@ jobs:
         run: unzip run_number.zip
 
       - name: 'Save run number to output'
-        id: save-run-number
-        run: cat ./run_number
-        # run: echo "::set-output name=test::$(cat ./run_number)"
+        id: save_run_number
+        # run: cat ./run_number
+        run: echo "::set-output name=run_number::$(cat ./run_number)"
+
+      - name: 'Log output'
+        # run: cat ./run_number
+        run: echo ${{steps.save_run_number.outputs.run_number}}
 # 
